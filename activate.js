@@ -11,7 +11,7 @@ export async function main(ns) {
         const req_open_nodes = ns.getServerNumPortsRequired(hostname);
 
         // Ensure we have the levels required to hack the server
-        const server_available = player_hacking_level >= req_hack_level && req_open_nodes <= port_crack_count();
+        const server_available = player_hacking_level >= req_hack_level && req_open_nodes <= port_crack_count(ns);
 
         if (server_available) {
             ns.tprint(`${hostname} is a feesible target!`);

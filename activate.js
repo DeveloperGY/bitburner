@@ -11,7 +11,7 @@ export async function main(ns) {
         const req_open_nodes = ns.getServerNumPortsRequired(hostname);
 
         // Ensure we have the levels required to hack the server
-        const server_available = player_hacking_level >= req_hack_level && req_open_nodes <= 1;
+        const server_available = player_hacking_level >= req_hack_level && req_open_nodes <= port_crack_count();
 
         if (server_available) {
             ns.tprint(`${hostname} is a feesible target!`);
@@ -27,4 +27,27 @@ export async function main(ns) {
         ns.tprint(`Starting Hack On ${nearby_servers[i]}`);
         ns.run("base_hack.js", 1, nearby_servers[i]);
     }
+}
+
+/** @param {NS} ns  */
+function port_crack_count(ns) {
+    let count = 0;
+
+    if (ns.fileExists("BruteSSH.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("FTPCrack.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("relaySMTP.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("HTTPWorm.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("SQLInject.exe", "home")) {
+        count += 1;
+    }
+
+    return count;
 }

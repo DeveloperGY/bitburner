@@ -36,6 +36,22 @@ export async function main(ns) {
                     ns.print("  -> Opening SSH Port...");
                     ns.brutessh(target);
                 }
+                if (ns.fileExists("FTPCrack.exe", "home")) {
+                    ns.print("  -> Opening FTP Port...");
+                    ns.ftpcrack(target);
+                }
+                if (ns.fileExists("relaySMTP.exe", "home")) {
+                    ns.print("  -> Opening SMTP Port...");
+                    ns.relaysmtp(target);
+                }
+                if (ns.fileExists("HTTPWorm.exe", "home")) {
+                    ns.print("  -> Opening HTTP Port...");
+                    ns.httpworm(target);
+                }
+                if (ns.fileExists("SQLInject.exe", "home")) {
+                    ns.print("  -> Opening SQL Port...");
+                    ns.sqlinject(target);
+                }
             }
 
             ns.nuke(target);

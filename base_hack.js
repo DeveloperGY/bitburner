@@ -15,7 +15,7 @@ export async function main(ns) {
 
     const has_root = ns.hasRootAccess(target);
     const required_ports = ns.getServerNumPortsRequired(target);
-    const has_required_ports = required_ports <= 1;
+    const has_required_ports = required_ports <= port_crack_count(ns);
     const has_required_hacking_level = ns.getHackingLevel() >= ns.getServerRequiredHackingLevel(target);
 
     ns.print(`==> Validating ${target}...`)
@@ -89,4 +89,27 @@ export async function main(ns) {
 /** @param {NS} ns */
 function disable_log(ns) {
     ns.disableLog("ALL");
+}
+
+/** @param {NS} ns  */
+function port_crack_count(ns) {
+    let count = 0;
+
+    if (ns.fileExists("BruteSSH.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("FTPCrack.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("relaySMTP.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("HTTPWorm.exe", "home")) {
+        count += 1;
+    }
+    if (ns.fileExists("SQLInject.exe", "home")) {
+        count += 1;
+    }
+
+    return count;
 }
